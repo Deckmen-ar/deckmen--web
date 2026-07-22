@@ -1,296 +1,516 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deckmen | Carpintería en Madera - Posadas, Misiones</title>
-    <meta name="description" content="Deckmen - Especialistas en decks, pérgolas, revestimientos, divisorias y muebles de madera en Posadas, Misiones.">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deckmen | Carpintería en Madera - Posadas, Misiones</title>
+<meta name="description" content="Decks, pérgolas, revestimientos, divisorias y muebles a medida en Posadas, Misiones. Presupuesto en 24hs por WhatsApp.">
+<style>
+  :root {
+    --madera-oscuro: #3E2723;
+    --madera-medio: #5D4037;
+    --madera-claro: #8D6E63;
+    --crema: #FFF8E1;
+    --blanco: #FFFFFF;
+    --negro: #1a1a1a;
+    --gris: #757575;
+    --verde-wa: #25D366;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--crema);
+    color: var(--negro);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--madera-oscuro);
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-size: 22px; font-weight: 800;
+    color: var(--crema); letter-spacing: 1px;
+  }
+  .logo span { color: var(--madera-claro); }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,248,225,0.85); font-size: 14px; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blanco); }
+  .menu-btn {
+    display: none; background: none; border: none;
+    color: var(--crema); font-size: 24px; cursor: pointer;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--madera-oscuro) 0%, var(--madera-medio) 100%);
+    color: var(--blanco);
+    padding: 140px 20px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800; line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: #D7CCC8; }
+  .hero p {
+    font-size: 17px; color: rgba(255,255,255,0.85);
+    margin-bottom: 32px; max-width: 540px; margin-left: auto; margin-right: auto;
+  }
+  .hero-badges {
+    display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+    margin-bottom: 32px; font-size: 13px; color: rgba(255,255,255,0.7);
+  }
+  .hero-badges span { display: flex; align-items: center; gap: 6px; }
+
+  /* BOTONES */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 10px; font-size: 15px;
+    font-weight: 600; cursor: pointer; border: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-wa {
+    background: var(--verde-wa); color: var(--blanco);
+    box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+  }
+  .btn-wa:hover { box-shadow: 0 6px 20px rgba(37,211,102,0.5); }
+  .btn-outline {
+    background: transparent; color: var(--blanco);
+    border: 2px solid rgba(255,255,255,0.4);
+  }
+  .btn-outline:hover { border-color: var(--blanco); background: rgba(255,255,255,0.08); }
+
+  /* SECCIONES */
+  section { padding: 64px 20px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-title {
+    font-size: clamp(24px, 4vw, 32px); font-weight: 700;
+    text-align: center; margin-bottom: 8px; color: var(--madera-oscuro);
+  }
+  .section-sub {
+    text-align: center; color: var(--gris); font-size: 15px;
+    margin-bottom: 40px;
+  }
+
+  /* SERVICIOS */
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .service-card {
+    background: var(--blanco); border-radius: 14px;
+    padding: 28px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+  }
+  .service-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--crema); display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 14px;
+  }
+  .service-card h3 {
+    font-size: 17px; font-weight: 700; color: var(--madera-oscuro);
+    margin-bottom: 8px;
+  }
+  .service-card p {
+    font-size: 14px; color: var(--gris); margin-bottom: 16px;
+  }
+  .service-card .cta-link {
+    font-size: 13px; font-weight: 600; color: var(--madera-medio);
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .service-card .cta-link::after {
+    content: '→'; transition: transform 0.2s;
+  }
+  .service-card:hover .cta-link::after { transform: translateX(4px); }
+
+  /* TRABAJOS */
+  .works-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .work-card {
+    background: var(--blanco); border-radius: 14px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .work-img {
+    height: 180px; background: linear-gradient(135deg, #D7CCC8, #BCAAA4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px; color: rgba(62,39,35,0.25);
+  }
+  .work-body { padding: 20px; }
+  .work-body h4 { font-size: 16px; font-weight: 700; color: var(--madera-oscuro); margin-bottom: 4px; }
+  .work-body p { font-size: 13px; color: var(--gris); }
+  .work-tag {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    background: var(--crema); color: var(--madera-medio);
+    padding: 4px 10px; border-radius: 20px; margin-top: 10px;
+  }
+
+  /* TESTIMONIOS */
+  .testimonials {
+    background: var(--blanco);
+  }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .testi-card {
+    background: var(--crema); border-radius: 14px; padding: 24px;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .stars { color: #FFB300; font-size: 16px; margin-bottom: 10px; letter-spacing: 2px; }
+  .testi-card p { font-size: 14px; color: var(--negro); margin-bottom: 14px; font-style: italic; }
+  .testi-author { font-size: 13px; font-weight: 700; color: var(--madera-oscuro); }
+  .testi-author span { font-weight: 400; color: var(--gris); }
+
+  /* FAQ */
+  .faq-item {
+    background: var(--blanco); border-radius: 12px; margin-bottom: 12px;
+    border: 1px solid rgba(0,0,0,0.04); overflow: hidden;
+  }
+  .faq-q {
+    padding: 18px 22px; font-size: 15px; font-weight: 600;
+    color: var(--madera-oscuro); cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none;
+  }
+  .faq-q::after {
+    content: '+'; font-size: 20px; color: var(--madera-claro);
+    transition: transform 0.2s;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 22px;
+    font-size: 14px; color: var(--gris);
+  }
+  .faq-item.open .faq-a {
+    max-height: 200px; padding: 0 22px 18px;
+  }
+
+  /* NOSOTROS */
+  .about {
+    background: linear-gradient(135deg, var(--madera-oscuro), var(--madera-medio));
+    color: var(--blanco);
+  }
+  .about .section-title { color: var(--blanco); }
+  .about .section-sub { color: rgba(255,255,255,0.7); }
+  .about-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px; text-align: center;
+  }
+  .about-item h4 {
+    font-size: 28px; font-weight: 800; color: var(--crema);
+    margin-bottom: 4px;
+  }
+  .about-item p { font-size: 13px; color: rgba(255,255,255,0.7); }
+
+  /* CONTACTO / FOOTER */
+  .contact {
+    background: var(--madera-oscuro); color: var(--blanco);
+    text-align: center; padding: 60px 20px;
+  }
+  .contact h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+  .contact p { color: rgba(255,255,255,0.75); margin-bottom: 24px; font-size: 15px; }
+  .contact-info {
+    display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+    margin-top: 32px; font-size: 14px; color: rgba(255,255,255,0.6);
+  }
+  .contact-info div { display: flex; align-items: center; gap: 6px; }
+
+  /* FLOATING WA */
+  .float-wa {
+    position: fixed; bottom: 20px; right: 20px;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--verde-wa); color: var(--blanco);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+    z-index: 999; transition: transform 0.2s;
+  }
+  .float-wa:hover { transform: scale(1.1); }
+
+  /* FOOTER LINKS */
+  footer {
+    background: #2a1a16; color: rgba(255,255,255,0.4);
+    text-align: center; padding: 20px; font-size: 12px;
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .menu-btn { display: block; }
+    .hero { padding: 120px 16px 60px; }
+    .hero-badges { gap: 12px; }
+    section { padding: 48px 16px; }
+    .contact-info { flex-direction: column; gap: 12px; }
+  }
+</style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="container nav-container">
-            <a href="#" class="logo">
-                <span class="logo-icon">🪵</span>
-                <span class="logo-text">DECKMEN</span>
-            </a>
-            <button class="nav-toggle" id="navToggle" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#inicio" class="nav-link">Inicio</a></li>
-                <li><a href="#servicios" class="nav-link">Servicios</a></li>
-                <li><a href="#trabajos" class="nav-link">Trabajos</a></li>
-                <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
-                <li><a href="#faq" class="nav-link">Preguntas</a></li>
-                <li><a href="#contacto" class="nav-link nav-cta">Cotizar</a></li>
-            </ul>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">DECK<span>MEN</span></a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#trabajos">Trabajos</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="menu-btn" onclick="alert('Menú en desarrollo. Deslizá para navegar.')">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Transformamos tus espacios con <span>madera de verdad</span></h1>
+    <p>Decks, pérgolas, revestimientos, divisorias y muebles a medida en Posadas, Misiones. Trabajos con garantía y presupuesto en 24 horas.</p>
+    <div class="hero-badges">
+      <span>⚡ Presupuesto en 24hs</span>
+      <span>🛡️ Trabajos con garantía</span>
+      <span>🌿 Madera tratada premium</span>
+    </div>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="https://wa.me/543764795398" class="btn btn-wa" target="_blank">📱 Cotizar por WhatsApp</a>
+      <a href="#servicios" class="btn btn-outline">Ver servicios</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="container">
+    <h2 class="section-title">¿Qué hacemos?</h2>
+    <p class="section-sub">Soluciones completas en madera para transformar tus espacios exteriores e interiores.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌿</div>
+        <h3>Decks de Madera</h3>
+        <p>Pisos de deck para exteriores e interiores. Contrapiso, a nivel de tierra o elevado.</p>
+        <a href="https://wa.me/543764795398?text=Hola%2C%20quiero%20consultar%20por%20un%20deck" class="cta-link" target="_blank">Consultar presupuesto</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏡</div>
+        <h3>Pérgolas</h3>
+        <p>Estructuras elegantes que dan sombra y estilo a tu jardín o patio. Con o sin cortasol.</p>
+        <a href="https://wa.me/543764795398?text=Hola%2C%20quiero%20consultar%20por%20una%20p%C3%A9rgola" class="cta-link" target="_blank">Consultar presupuesto</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">☀️</div>
+        <h3>Cortasoles</h3>
+        <p>Protección solar con estilo. Ideal para ventanas, balcones y espacios que necesitan sombra.</p>
+        <a href="https://wa.me/543764795398?text=Hola%2C%20quiero%20consultar%20por%20un%20cortasol" class="cta-link" target="_blank">Consultar presupuesto</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🪵</div>
+        <h3>Revestimientos</h3>
+        <p>Paredes y techos con machimbre de madera. Calidez natural para interiores y exteriores.</p>
+        <a href="https://wa.me/543764795398?text=Hola%2C%20quiero%20consultar%20por%20un%20revestimiento" class="cta-link" target="_blank">Consultar presupuesto</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚪</div>
+        <h3>Divisorias</h3>
+        <p>Separa espacios con estilo. Perfectas para oficinas, hogares y locales comerciales.</p>
+        <a href="https://wa.me/543764795398?text=Hola%2C%20quiero%20consultar%20por%20una%20divisoria" class="cta-link" target="_blank">Consultar presupuesto</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🪑</div>
+        <h3>Escritorios, Mesas & Muebles</h3>
+        <p>Diseños a medida: escritorios flotantes, mesas de comedor, racks y más.</p>
+        <a href="https://wa.me/543764795398?text=Hola%2C%20quiero%20consultar%20por%20muebles%20a%20medida" class="cta-link" target="_blank">Consultar presupuesto</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>Armado de Muebles por Pedido</h3>
+        <p>¿Compraste un mueble y no sabés cómo armarlo? Nosotros lo hacemos por vos.</p>
+        <a href="https://wa.me/543764795398?text=Hola%2C%20quiero%20consultar%20por%20armado%20de%20muebles" class="cta-link" target="_blank">Consultar presupuesto</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRABAJOS -->
+<section id="trabajos" style="background:var(--blanco);">
+  <div class="container">
+    <h2 class="section-title">Hechos en Posadas</h2>
+    <p class="section-sub">Cada proyecto es único. Acá van algunos de los trabajos que hicimos para clientes reales de Misiones.</p>
+    <div class="works-grid">
+      <div class="work-card">
+        <div class="work-img">📸</div>
+        <div class="work-body">
+          <h4>Deck Elevado</h4>
+          <p>6.40m x 3.90m · Posadas</p>
+          <span class="work-tag">Cliente: Lorena</span>
         </div>
-    </nav>
-
-    <section class="hero" id="inicio">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <span class="hero-badge">📍 Posadas, Misiones</span>
-            <h1 class="hero-title">Transformamos tus espacios con <span class="accent">madera de verdad</span></h1>
-            <p class="hero-subtitle">Decks, pérgolas, revestimientos, divisorias y muebles a medida. Trabajos con garantía y presupuesto en 24 horas.</p>
-            <div class="hero-buttons">
-                <a href="https://wa.me/543764795398?text=Hola%20Deckmen,%20quiero%20cotizar%20un%20trabajo" class="btn btn-primary" target="_blank">
-                    <span>📱</span> Cotizar por WhatsApp
-                </a>
-                <a href="#servicios" class="btn btn-outline">Ver servicios</a>
-            </div>
-            <div class="hero-features">
-                <div class="feature-item"><span class="feature-icon">⚡</span><span>Presupuesto en 24hs</span></div>
-                <div class="feature-item"><span class="feature-icon">🛡️</span><span>Trabajos con garantía</span></div>
-                <div class="feature-item"><span class="feature-icon">🌿</span><span>Madera tratada premium</span></div>
-            </div>
+      </div>
+      <div class="work-card">
+        <div class="work-img">📸</div>
+        <div class="work-body">
+          <h4>Pérgola 4x4m</h4>
+          <p>Con cortasol · Posadas</p>
+          <span class="work-tag">Cliente: Caren</span>
         </div>
-        <div class="hero-scroll"><span>Desplazá para ver más</span><div class="scroll-arrow">↓</div></div>
-    </section>
-
-    <section class="servicios" id="servicios">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Nuestros Servicios</span>
-                <h2 class="section-title">¿Qué hacemos?</h2>
-                <p class="section-desc">Soluciones completas en madera para transformar tus espacios exteriores e interiores.</p>
-            </div>
-            <div class="servicios-grid">
-                <div class="servicio-card">
-                    <div class="servicio-img"><div class="img-placeholder"><span>📸 Foto real de deck</span></div></div>
-                    <div class="servicio-content">
-                        <h3>Decks de Madera</h3>
-                        <p>Pisos de deck para exteriores e interiores. Contrapiso, a nivel de tierra o elevado.</p>
-                        <span class="precio-desde">Desde $43.000/m² instalado</span>
-                        <a href="https://wa.me/543764795398?text=Hola%20Deckmen,%20quiero%20cotizar%20un%20deck" class="servicio-link" target="_blank">Cotizar →</a>
-                    </div>
-                </div>
-                <div class="servicio-card">
-                    <div class="servicio-img"><div class="img-placeholder"><span>📸 Foto real de pérgola</span></div></div>
-                    <div class="servicio-content">
-                        <h3>Pérgolas</h3>
-                        <p>Estructuras elegantes que dan sombra y estilo a tu jardín o patio. Con o sin cortasol.</p>
-                        <span class="precio-desde">Desde $48.000/m² instalado</span>
-                        <a href="https://wa.me/543764795398?text=Hola%20Deckmen,%20quiero%20cotizar%20una%20pergola" class="servicio-link" target="_blank">Cotizar →</a>
-                    </div>
-                </div>
-                <div class="servicio-card">
-                    <div class="servicio-img"><div class="img-placeholder"><span>📸 Foto real de cortasol</span></div></div>
-                    <div class="servicio-content">
-                        <h3>Cortasoles</h3>
-                        <p>Protección solar con estilo. Ideal para ventanas, balcones y espacios que necesitan sombra.</p>
-                        <span class="precio-desde">Desde $30.000/m² instalado</span>
-                        <a href="https://wa.me/543764795398?text=Hola%20Deckmen,%20quiero%20cotizar%20un%20cortasol" class="servicio-link" target="_blank">Cotizar →</a>
-                    </div>
-                </div>
-                <div class="servicio-card">
-                    <div class="servicio-img"><div class="img-placeholder"><span>📸 Foto real de revestimiento</span></div></div>
-                    <div class="servicio-content">
-                        <h3>Revestimientos</h3>
-                        <p>Paredes y techos con machimbre de madera. Calidez natural para interiores y exteriores.</p>
-                        <span class="precio-desde">Desde $42.000/m² instalado</span>
-                        <a href="https://wa.me/543764795398?text=Hola%20Deckmen,%20quiero%20cotizar%20un%20revestimiento" class="servicio-link" target="_blank">Cotizar →</a>
-                    </div>
-                </div>
-                <div class="servicio-card">
-                    <div class="servicio-img"><div class="img-placeholder"><span>📸 Foto real de divisoria</span></div></div>
-                    <div class="servicio-content">
-                        <h3>Divisorias</h3>
-                        <p>Separá espacios con estilo. Perfectas para oficinas, hogares y locales comerciales.</p>
-                        <span class="precio-desde">Consultar</span>
-                        <a href="https://wa.me/543764795398?text=Hola%20Deckmen,%20quiero%20cotizar%20una%20divisoria" class="servicio-link" target="_blank">Cotizar →</a>
-                    </div>
-                </div>
-                <div class="servicio-card">
-                    <div class="servicio-img"><div class="img-placeholder"><span>📸 Foto real de mueble</span></div></div>
-                    <div class="servicio-content">
-                        <h3>Escritorios, Mesas & Muebles</h3>
-                        <p>Diseños a medida: escritorios flotantes, mesas de comedor, racks y más.</p>
-                        <span class="precio-desde">Consultar</span>
-                        <a href="https://wa.me/543764795398?text=Hola%20Deckmen,%20quiero%20cotizar%20un%20mueble" class="servicio-link" target="_blank">Cotizar →</a>
-                    </div>
-                </div>
-                <div class="servicio-card servicio-destacado">
-                    <div class="servicio-img"><div class="img-placeholder"><span>📸 Foto de armado</span></div></div>
-                    <div class="servicio-content">
-                        <span class="badge-nuevo">NUEVO</span>
-                        <h3>Armado de Muebles por Pedido</h3>
-                        <p>¿Compraste un mueble y no sabés cómo armarlo? Nosotros lo hacemos por vos.</p>
-                        <span class="precio-desde">Desde $15.000</span>
-                        <a href="https://wa.me/543764795398?text=Hola%20Deckmen,%20quiero%20cotizar%20armado%20de%20muebles" class="servicio-link" target="_blank">Cotizar →</a>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="work-card">
+        <div class="work-img">📸</div>
+        <div class="work-body">
+          <h4>Divisoria con Espejo</h4>
+          <p>Con estantes · Posadas</p>
+          <span class="work-tag">Cliente: Graciela</span>
         </div>
-    </section>
-
-    <section class="trabajos" id="trabajos">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Nuestros Trabajos</span>
-                <h2 class="section-title">Hechos en Posadas</h2>
-                <p class="section-desc">Cada proyecto es único. Acá van algunos de los trabajos que hicimos para clientes reales de Misiones.</p>
-            </div>
-            <div class="trabajos-grid">
-                <div class="trabajo-card">
-                    <div class="trabajo-img"><div class="img-placeholder trabajo-placeholder"><span>📸 Deck elevado 6.40x3.90m</span><small>Cliente: Lorena</small></div></div>
-                    <div class="trabajo-info"><h4>Deck Elevado</h4><p>6.40m x 3.90m · Posadas</p><span class="trabajo-tag">Deck</span></div>
-                </div>
-                <div class="trabajo-card">
-                    <div class="trabajo-img"><div class="img-placeholder trabajo-placeholder"><span>📸 Pérgola 4x4m</span><small>Cliente: Caren</small></div></div>
-                    <div class="trabajo-info"><h4>Pérgola 4x4m</h4><p>Con cortasol · Posadas</p><span class="trabajo-tag">Pérgola</span></div>
-                </div>
-                <div class="trabajo-card">
-                    <div class="trabajo-img"><div class="img-placeholder trabajo-placeholder"><span>📸 Divisoria con espejo</span><small>Cliente: Graciela</small></div></div>
-                    <div class="trabajo-info"><h4>Divisoria con Espejo</h4><p>Con estantes · Posadas</p><span class="trabajo-tag">Divisoria</span></div>
-                </div>
-                <div class="trabajo-card">
-                    <div class="trabajo-img"><div class="img-placeholder trabajo-placeholder"><span>📸 Escritorio flotante</span><small>Cliente: Florencia</small></div></div>
-                    <div class="trabajo-info"><h4>Escritorio Flotante</h4><p>Diseño minimalista · Posadas</p><span class="trabajo-tag">Mueble</span></div>
-                </div>
-            </div>
-            <div class="trabajos-cta">
-                <p>¿Querés ver más? Seguinos en Instagram</p>
-                <a href="https://instagram.com/Deckmen2024" class="btn btn-secondary" target="_blank"><span>📷</span> @Deckmen2024</a>
-            </div>
+      </div>
+      <div class="work-card">
+        <div class="work-img">📸</div>
+        <div class="work-body">
+          <h4>Escritorio Flotante</h4>
+          <p>Diseño minimalista · Posadas</p>
+          <span class="work-tag">Cliente: Florencia</span>
         </div>
-    </section>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:28px; font-size:14px; color:var(--gris);">
+      📷 ¿Querés ver más? Seguinos en <a href="https://instagram.com/Deckmen2024" target="_blank" style="color:var(--madera-medio); font-weight:600;">@Deckmen2024</a>
+    </p>
+  </div>
+</section>
 
-    <section class="nosotros" id="nosotros">
-        <div class="container">
-            <div class="nosotros-grid">
-                <div class="nosotros-img"><div class="img-placeholder nosotros-placeholder"><span>📸 Foto tuya o del taller</span></div></div>
-                <div class="nosotros-content">
-                    <span class="section-tag">Sobre Nosotros</span>
-                    <h2>Deckmen es más que madera</h2>
-                    <p>Somos un emprendimiento de Posadas, Misiones, dedicado a la carpintería y construcción en madera. Cada trabajo lo hacemos como si fuera para nuestra casa.</p>
-                    <p>Trabajamos con madera tratada de primera calidad, traída de proveedores confiables. No usamos imitaciones ni materiales de bajo costo que se deterioren al año.</p>
-                    <div class="nosotros-stats">
-                        <div class="stat"><span class="stat-num">7</span><span class="stat-label">Días de entrega promedio</span></div>
-                        <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Trabajos con garantía</span></div>
-                        <div class="stat"><span class="stat-num">Posadas</span><span class="stat-label">Misiones, Argentina</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- TESTIMONIOS -->
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+    <p class="section-sub">Trabajos reales, opiniones reales.</p>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"El deck quedó espectacular. Daniel cumplió con los tiempos y la calidad es excelente. Lo recomiendo totalmente."</p>
+        <div class="testi-author">Lorena <span>· Deck elevado 6.40x3.90m</span></div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"La pérgola transformó mi patio. Muy profesional el trabajo y el trato. Volvería a contratar sin dudar."</p>
+        <div class="testi-author">Caren <span>· Pérgola 4x4m</span></div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"La divisoria con espejo y estantes quedó perfecta. Superó mis expectativas. Muy recomendable."</p>
+        <div class="testi-author">Graciela <span>· Divisoria interior</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="testimonios">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Testimonios</span>
-                <h2 class="section-title">Lo que dicen nuestros clientes</h2>
-            </div>
-            <div class="testimonios-grid">
-                <div class="testimonio-card">
-                    <div class="testimonio-stars">⭐⭐⭐⭐⭐</div>
-                    <p>"El deck quedó espectacular. Daniel cumplió con los tiempos y la calidad es excelente. Lo recomiendo totalmente."</p>
-                    <div class="testimonio-author"><strong>Lorena</strong><span>Deck elevado 6.40x3.90m</span></div>
-                </div>
-                <div class="testimonio-card">
-                    <div class="testimonio-stars">⭐⭐⭐⭐⭐</div>
-                    <p>"La pérgola transformó mi patio. Muy profesional el trabajo y el trato. Volvería a contratar sin dudar."</p>
-                    <div class="testimonio-author"><strong>Caren</strong><span>Pérgola 4x4m</span></div>
-                </div>
-                <div class="testimonio-card">
-                    <div class="testimonio-stars">⭐⭐⭐⭐⭐</div>
-                    <p>"La divisoria con espejo y estantes quedó perfecta. Superó mis expectativas. Muy recomendable."</p>
-                    <div class="testimonio-author"><strong>Graciela</strong><span>Divisoria interior</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- NOSOTROS -->
+<section id="nosotros" class="about">
+  <div class="container">
+    <h2 class="section-title">Deckmen es más que madera</h2>
+    <p class="section-sub">Somos un emprendimiento de Posadas, Misiones, dedicado a la carpintería y construcción en madera. Cada trabajo lo hacemos como si fuera para nuestra casa.</p>
+    <p style="text-align:center; max-width:640px; margin:0 auto 40px; font-size:15px; color:rgba(255,255,255,0.8);">
+      Trabajamos con madera tratada de primera calidad, traída de proveedores confiables. No usamos imitaciones ni materiales de bajo costo que se deterioren al año.
+    </p>
+    <div class="about-grid">
+      <div class="about-item">
+        <h4>7</h4>
+        <p>Días de entrega promedio</p>
+      </div>
+      <div class="about-item">
+        <h4>100%</h4>
+        <p>Trabajos con garantía</p>
+      </div>
+      <div class="about-item">
+        <h4>Posadas</h4>
+        <p>Misiones, Argentina</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="faq" id="faq">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Preguntas Frecuentes</span>
-                <h2 class="section-title">¿Tenés dudas?</h2>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-question"><span>¿Cuánto tarda un presupuesto?</span><span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Te respondemos en menos de 24 horas por WhatsApp. Solo necesitamos que nos cuentes qué querés, las medidas aproximadas y una foto del espacio si podés.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question"><span>¿Incluye la instalación?</span><span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Sí, todos nuestros precios incluyen instalación en domicilio dentro de Posadas. Para otras zonas de Misiones consultá el costo de flete.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question"><span>¿Qué tipo de madera usan?</span><span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Trabajamos con madera tratada de primera calidad (pino y eucaliptus) de proveedores confiables. La madera está preparada para resistir la humedad y el clima de Misiones.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question"><span>¿Hacen trabajos a medida?</span><span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Sí, todos nuestros trabajos son a medida. No vendemos productos prefabricados. Cada diseño se adapta a tu espacio y necesidades.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question"><span>¿Cómo se paga?</span><span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Se pide un 50% de seña para iniciar el trabajo y el 50% restante al momento de la entrega/instalación. Aceptamos transferencia y efectivo.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question"><span>¿Tienen garantía?</span><span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Sí, todos nuestros trabajos tienen garantía. Si hay algún problema con la instalación o materiales, lo resolvemos sin costo adicional.</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <h2 class="section-title">¿Tenés dudas?</h2>
+    <p class="section-sub">Respondemos lo que más nos preguntan.</p>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Cuánto tarda un presupuesto?</div>
+      <div class="faq-a">Te respondemos en menos de 24 horas por WhatsApp. Solo necesitamos que nos cuentes qué querés, las medidas aproximadas y una foto del espacio si podés.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Incluye la instalación?</div>
+      <div class="faq-a">Sí, todos nuestros precios incluyen instalación en domicilio dentro de Posadas. Para otras zonas de Misiones consultá el costo de flete.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Qué tipo de madera usan?</div>
+      <div class="faq-a">Trabajamos con madera tratada de primera calidad (pino y eucaliptus) de proveedores confiables. La madera está preparada para resistir la humedad y el clima de Misiones.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Hacen trabajos a medida?</div>
+      <div class="faq-a">Sí, todos nuestros trabajos son a medida. No vendemos productos prefabricados. Cada diseño se adapta a tu espacio y necesidades.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Cómo se paga?</div>
+      <div class="faq-a">Se pide un 50% de seña para iniciar el trabajo y el 50% restante al momento de la entrega/instalación. Aceptamos transferencia y efectivo.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Tienen garantía?</div>
+      <div class="faq-a">Sí, todos nuestros trabajos tienen garantía. Si hay algún problema con la instalación o materiales, lo resolvemos sin costo adicional.</div>
+    </div>
+  </div>
+</section>
 
-    <section class="contacto" id="contacto">
-        <div class="container">
-            <div class="contacto-box">
-                <div class="contacto-content">
-                    <h2>¿Listo para transformar tu espacio?</h2>
-                    <p>Escribinos por WhatsApp y en menos de 24 horas te mandamos el presupuesto. Sin compromiso.</p>
-                    <div class="contacto-info">
-                        <div class="contacto-item"><span>📱</span><div><strong>WhatsApp</strong><p>+54 3764 795398</p></div></div>
-                        <div class="contacto-item"><span>📍</span><div><strong>Ubicación</strong><p>Posadas, Misiones, Argentina</p><small>Ref: San Marcos casi Francia</small></div></div>
-                        <div class="contacto-item"><span>⏱️</span><div><strong>Horario</strong><p>Lun a Sáb: 8:00 - 19:00</p></div></div>
-                    </div>
-                    <a href="https://wa.me/543764795398?text=Hola%20Deckmen,%20quiero%20cotizar%20un%20trabajo" class="btn btn-primary btn-large" target="_blank"><span>💬</span> Escribir por WhatsApp</a>
-                </div>
-                <div class="contacto-img"><div class="img-placeholder contacto-placeholder"><span>📸 Foto de un trabajo terminado</span></div></div>
-            </div>
-        </div>
-    </section>
+<!-- CONTACTO -->
+<section id="contacto" class="contact">
+  <h2>¿Listo para transformar tu espacio?</h2>
+  <p>Escribinos por WhatsApp y en menos de 24 horas te mandamos el presupuesto. Sin compromiso.</p>
+  <a href="https://wa.me/543764795398" class="btn btn-wa" target="_blank" style="font-size:17px; padding:16px 36px;">📱 Escribir por WhatsApp</a>
+  <div class="contact-info">
+    <div>📱 +54 3764 795398</div>
+    <div>📍 Posadas, Misiones, Argentina</div>
+    <div>🕐 Lun a Sáb: 8:00 - 19:00</div>
+  </div>
+</section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand"><span class="logo-icon">🪵</span><span class="footer-logo">DECKMEN</span><p>Carpintería en madera. Posadas, Misiones.</p></div>
-                <div class="footer-links">
-                    <h4>Servicios</h4>
-                    <ul>
-                        <li><a href="#servicios">Decks</a></li>
-                        <li><a href="#servicios">Pérgolas</a></li>
-                        <li><a href="#servicios">Cortasoles</a></li>
-                        <li><a href="#servicios">Revestimientos</a></li>
-                        <li><a href="#servicios">Divisorias</a></li>
-                        <li><a href="#servicios">Muebles</a></li>
-                        <li><a href="#servicios">Armado de muebles</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Contacto</h4>
-                    <ul>
-                        <li><a href="https://wa.me/543764795398" target="_blank">WhatsApp</a></li>
-                        <li><a href="https://instagram.com/Deckmen2024" target="_blank">Instagram</a></li>
-                        <li>Posadas, Misiones</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 Deckmen. Todos los derechos reservados.</p>
-                <p>Hecho con ❤️ en Posadas, Misiones</p>
-            </div>
-        </div>
-    </footer>
+<footer>
+  © 2026 Deckmen — Carpintería en madera. Posadas, Misiones.<br>
+  Ref: San Marcos casi Francia
+</footer>
 
-    <a href="https://wa.me/543764795398?text=Hola%20Deckmen,%20quiero%20cotizar%20un%20trabajo" class="whatsapp-float" target="_blank" aria-label="WhatsApp"><span>💬</span></a>
+<!-- FLOATING WA -->
+<a href="https://wa.me/543764795398" class="float-wa" target="_blank" title="Cotizar por WhatsApp">💬</a>
 
-    <script src="main.js"></script>
 </body>
 </html>
